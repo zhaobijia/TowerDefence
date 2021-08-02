@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Ground: {fileID: 907262655}
+  tilePrefab: {fileID: 346786090412721905, guid: 7f7e8df0aa6569f4dbc68e790104c316, type: 3}
 --- !u!4 &90184172
 Transform:
   m_ObjectHideFlags: 0
@@ -279,7 +280,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &907262655
 Transform:
   m_ObjectHideFlags: 0
@@ -470,7 +471,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameBoard: {fileID: 90184171}
-  boardSize: {x: 10, y: 10}
+  boardSize: {x: 25, y: 10}
 --- !u!4 &2091095144
 Transform:
   m_ObjectHideFlags: 0
