@@ -44,6 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c17019f9951924429ba3f4f83b4f1c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  North: {fileID: 0}
+  South: {fileID: 0}
+  East: {fileID: 0}
+  West: {fileID: 0}
+  NextTileOnPath: {fileID: 0}
+  hasPath: 0
 --- !u!1 &2217472779203106201
 GameObject:
   m_ObjectHideFlags: 0

@@ -471,7 +471,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameBoard: {fileID: 90184171}
-  boardSize: {x: 25, y: 10}
+  boardSize: {x: 8, y: 8}
 --- !u!4 &2091095144
 Transform:
   m_ObjectHideFlags: 0
