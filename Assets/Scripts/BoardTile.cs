@@ -7,6 +7,7 @@ public class BoardTile : MonoBehaviour
     //neighbours
     public BoardTile North=null, South = null, East = null, West = null;
     public BoardTile NextTileOnPath = null;
+    public bool NSFirst=true;//for checkerboard
     int d_Dest; //distance to destination
     public bool hasPath;
     
@@ -23,6 +24,7 @@ public class BoardTile : MonoBehaviour
         d_Dest = 0;
         NextTileOnPath = this;
         hasPath = true;
+        gameObject.SetActive(false);
     }
 
     public void SetNewDistanceToDest(int d)
@@ -53,20 +55,20 @@ public class BoardTile : MonoBehaviour
     }
 
     //UI
-    public void ShowPathPointer(int d)
+    public void ShowPathPointer(string dir)
     {
-        switch (d)
+        switch (dir)
         {
-            case 1:
+            case "north":
                 PointUp();
                 break;
-            case 2:
+            case "south":
                 PointDown();
                 break;
-            case 3:
+            case "west":
                 PointLeft();
                 break;
-            case 4:
+            case "east":
                 PointRight();
                 break;
             

@@ -34,8 +34,22 @@ public class GameBoard : MonoBehaviour
                 tile.transform.SetParent(this.transform);
                 tile.transform.position = new Vector3(pos_x,  1f, pos_y);
 
+
+
+                //checkerboard for performing bfs
+                if ((col & 1) == 0) tile.NSFirst = true;                
+                else tile.NSFirst = false;
+                //toggle y
+                if ((row&1) == 0)
+                {
+                    tile.NSFirst = !tile.NSFirst;
+                }
+
+
                 pos_x++;
             }
+            
+            
             pos_y++;
         }
         GameTilesSetNeighbours(Size);
@@ -92,43 +106,39 @@ public class GameBoard : MonoBehaviour
         while (tileq.Count > 0)
         {
             BoardTile t = tileq.Dequeue();
-            
-            int d = t.GetNewDistanceToDest();
-            if (t.North!=null && !t.North.hasPath)
+            if (t.NSFirst)
             {
-                tileq.Enqueue(t.North);
-                t.North.SetNextTileOnPath(t);
-                t.North.SetNewDistanceToDest(d + 1);
-                //point down
-                t.North.ShowPathPointer(2);
+
+                BFSCheckDir(t.North, tileq, t, "south");
+                BFSCheckDir(t.South, tileq, t, "north");
+                BFSCheckDir(t.East, tileq, t, "west");
+                BFSCheckDir(t.West, tileq, t, "east");
             }
-            if (t.South != null && !t.South.hasPath)
+            else
             {
-                tileq.Enqueue(t.South);
-                t.South.SetNextTileOnPath(t);
-                t.South.SetNewDistanceToDest(d + 1);
-                //point up
-                t.South.ShowPathPointer(1);
-            }
-            if (t.East != null && !t.East.hasPath)
-            {
-                tileq.Enqueue(t.East);
-                t.East.SetNextTileOnPath(t);
-                t.East.SetNewDistanceToDest(d + 1);
-                //point left
-                t.East.ShowPathPointer(3);
-            }
-            if (t.West != null && !t.West.hasPath)
-            {
-                tileq.Enqueue(t.West);
-                t.West.SetNextTileOnPath(t);
-                t.West.SetNewDistanceToDest(d + 1);
-                //point right
-                t.West.ShowPathPointer(4);
+                BFSCheckDir(t.East, tileq, t, "west");
+                BFSCheckDir(t.West, tileq, t, "east");
+                BFSCheckDir(t.North, tileq, t, "south");
+                BFSCheckDir(t.South, tileq, t, "north");
             }
 
         }
     }
+
+    //bfs help function
+    void BFSCheckDir(BoardTile tileOnDir,Queue<BoardTile> tileq,BoardTile tile,string dir)
+    {
+        int d = tile.GetNewDistanceToDest();
+        if (tileOnDir != null && !tileOnDir.hasPath)
+        {
+            tileq.Enqueue(tileOnDir);
+            tileOnDir.SetNextTileOnPath(tile);
+            tileOnDir.SetNewDistanceToDest(d + 1);
+            //point right
+            tileOnDir.ShowPathPointer(dir);
+        }
+    }
+    
 
     void ClickOnTile()
     {
